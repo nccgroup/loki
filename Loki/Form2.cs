@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MSTSCLib;
-using WindowsInput;
+using WindowsInput; //available at https://inputsimulator.codeplex.com/ 
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Net.Sockets;
