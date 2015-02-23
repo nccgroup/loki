@@ -14,6 +14,14 @@ using System.Net.Sockets;
 using System.Net;
 using System.Net.Security;
 
+//Released as open source by NCC Group Plc - http://www.nccgroup.com/
+//
+//Developed by Dave Spencer, david [dot] spencer [at] nccgroup [dot] com
+//
+//http://www.github.com/nccgroup/Loki
+//
+//Released under AGPL see LICENSE for more information
+
 namespace Loki
 {
     public partial class Loki : Form
