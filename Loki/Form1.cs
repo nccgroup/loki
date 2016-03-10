@@ -23,6 +23,8 @@ namespace Loki
         public static string sRDPGateway = "";
         public static string sMetasploitServer = "";
         public static int iMetasploitPort = 8080;
+        public static int iKeypress_delay = 50;
+        public static int iTimeout = 50; 
         public static bool FullScreen = false;
         public static bool NLA = true;
         public static int iRDPPort = 3389;
@@ -63,6 +65,45 @@ namespace Loki
             {
                 NLA = false;
             }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void metasploitPort_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void Keypress_delay_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Timeout_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RDPGateway_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton_IE_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RDPPort_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

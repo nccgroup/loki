@@ -92,8 +92,7 @@ namespace Loki
             }
             
             rdp.ConnectingText = "Connecting...";
-            rdp.AdvancedSettings2.SmartSizing = true;
-            rdp.AdvancedSettings2.overallConnectionTimeout = 20;
+            rdp.AdvancedSettings2.overallConnectionTimeout = Form1.iTimeout;
             //test for port
             rdp.AdvancedSettings2.RDPPort = Form1.iRDPPort;
             rdp.AdvancedSettings2.SmartSizing = true;
@@ -181,44 +180,50 @@ namespace Loki
 
         private void sendFileSendKeysToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult speed = MessageBox.Show("Is the network particularly slow?", "Browser Check", MessageBoxButtons.YesNo);
-            if (speed == DialogResult.Yes)
-            {
-                milliSeconds = 10;
-            }
-            else if (speed == DialogResult.No)
-            {
-                milliSeconds = 3;
-            }
             
-            
-            DialogResult checkIE = MessageBox.Show("Is the remote browser Internet Explorer?", "Browser Check", MessageBoxButtons.YesNo);
-            if (checkIE == DialogResult.Yes)
+            milliSeconds = Form1.iKeypress_delay;
+
+            DialogResult editor_isthere = MessageBox.Show("Please confirm that there is an open text-editor with focus inside the RDP-session. ", "Texteditor Check", MessageBoxButtons.YesNo);
+
+            if (editor_isthere == DialogResult.No)
             {
-                header = "From: \"Loki\"\nSubject: \nMIME-Version: 1.0\nContent-Type: multipart/related;\n	type=\"text/html\";\n	boundary=\"----=_NextPart_000_0000_01CE8E9F.BEEBC5F0\"\n\nThis is a multi-part message in MIME format.\n\n------=_NextPart_000_0000_01CE8E9F.BEEBC5F0\nContent-Type: text/html;\n	charset=\"Windows-1252\"\nContent-Transfer-Encoding: quoted-printable\nContent-Location: file://C:\\Loki.html\n\n<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">\n<HTML><HEAD><META content=3D\"IE=3D5.0000\" =\nhttp-equiv=3D\"X-UA-Compatible\">\n\n<META http-equiv=3D\"Content-Type\" content=3D\"text/html; =\ncharset=3Dwindows-1252\">\n<META name=3D\"GENERATOR\" content=3D\"MSHTML 10.00.9200.16635\"></HEAD>\n<BODY><IMG src=3D\"file:///Loki.htm\"><h3>save this file as webpage complete (html). then rename the .tmp file to .exe<h3></BODY></HTML>\n\n------=_NextPart_000_0000_01CE8E9F.BEEBC5F0\nContent-Type: application/x-msdownload\nContent-Transfer-Encoding: base64\nContent-Location: file:///Loki.htm\n\n";
-                endFile = "\n\n------=_NextPart_000_0000_01CE8E9F.BEEBC5F0--\n";
-                
+                return;
             }
-            else if (checkIE == DialogResult.No)
-            {
-                header = "<a href=\"data:application/octet-stream/;base64,";
-                endFile = "\" alt=\"Red dot\" />Right click and save as</a>";
-            }
+
+
             openFD1.Title = "Choose a file to encode";
             openFD1.FileName = "";
             openFD1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             openFD1.Filter = "All Files|*.*";
+
             if (openFD1.ShowDialog() != DialogResult.Cancel)
             {
                 inputName = openFD1.FileName;
-                MessageBox.Show("You have selected " + inputName + "\nNow ensure your client has notepad or some other text editor open before clicking send file");
             }
-            
+
             if (inputName == "")
             {
-                MessageBox.Show("Please select a file to send");
+                MessageBox.Show("Please select a file to send!");
+                return;
             }
-            else if (inputName != "")
+
+            //MessageBox.Show("Will send "+ inputName);
+             
+            DialogResult checkIE = MessageBox.Show("Is the remote browser Internet Explorer?", "Browser Check", MessageBoxButtons.YesNo);
+            if (checkIE == DialogResult.Yes)
+            {
+                header = "From: \"Loki\"\nSubject: \nMIME-Version: 1.0\nContent-Type: multipart/related;\n	type=\"text/html\";\n	boundary=\"----=_NextPart_000_0000_01CE8E9F.BEEBC5F0\"\n\nThis is a multi-part message in MIME format.\n\n------=_NextPart_000_0000_01CE8E9F.BEEBC5F0\nContent-Type: text/html;\n	charset=\"Windows-1252\"\nContent-Transfer-Encoding: quoted-printable\nContent-Location: file://C:\\Loki.html\n\n<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">\n<HTML><HEAD><META content=3D\"IE=3D5.0000\" =\nhttp-equiv=3D\"X-UA-Compatible\">\n\n<META http-equiv=3D\"Content-Type\" content=3D\"text/html; =\ncharset=3Dwindows-1252\">\n<META name=3D\"GENERATOR\" content=3D\"MSHTML 10.00.9200.16635\"></HEAD>\n<BODY><IMG src=3D\"file:///Loki.htm\"><h3>Now save this file as 'Webpage complete (html)' then rename the larger .tmp file back to its original name " + inputName + "<h3></BODY></HTML>\n\n------=_NextPart_000_0000_01CE8E9F.BEEBC5F0\nContent-Type: application/x-msdownload\nContent-Transfer-Encoding: base64\nContent-Location: file:///Loki.htm\n\n";
+                endFile = "\n\n------=_NextPart_000_0000_01CE8E9F.BEEBC5F0--\n";
+
+            }
+            else if (checkIE == DialogResult.No)
+            {
+                header = "<a href=\"data:application/octet-stream/;base64,";
+                endFile = "\" alt=\"Red dot\" />Right click and save as its original Name: "+ inputName+ "</a>";
+            }
+
+                                   
+            if (inputName != "")
             {
                 byte[] bytes = System.IO.File.ReadAllBytes(inputName);
                 string array = System.Convert.ToBase64String(bytes);
@@ -228,12 +233,13 @@ namespace Loki
                 int mm = timeSpan.Minutes;
                 int ss = timeSpan.Seconds;
                 
-                DialogResult areYouSure = MessageBox.Show("This will take around " + hh + ":" + mm + ":" + ss + " to complete! \n\nYou will not be able to abort this or use the machine until the process has finished. \n\nAre you sure you want to continue?", "Time Required", MessageBoxButtons.YesNo);
+                DialogResult areYouSure = MessageBox.Show("This will take around " + hh + ":" + mm + ":" + ss + " to complete! \n\nYou will not be able to abort this or use the machine until the process has finished. \n Please make sure Notepad is open and ready. Otherwise click cancel. Lean back and wait until next prompt! \n\nAre you sure you want to continue?", "Time Required", MessageBoxButtons.YesNo);
                 
                 if (areYouSure == DialogResult.No)
                 {
-                    this.Close();
+                    return;
                 }
+
 
                 // Display the ProgressBar control.
                 progressBarLoki.Visible = true;
@@ -267,7 +273,17 @@ namespace Loki
                         progressBarLoki.PerformStep();
                     }
 
-                    MessageBox.Show("now save the file as a html file type.");
+                if (checkIE == DialogResult.Yes)
+                {
+                    MessageBox.Show("Target was IE: Now save the file as a .mht file type and open it with Internet-Explorer.");
+
+
+                }
+                else if (checkIE == DialogResult.No)
+                {
+                    MessageBox.Show("Target was other browser: Now save the file as a .html file type and open it with your browser.");
+                }
+                                
                     progressBarLoki.Visible = false;
             }
         }
