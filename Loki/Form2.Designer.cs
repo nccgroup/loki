@@ -54,16 +54,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             panel1.AutoScroll = true;
             panel1.Controls.Add(this.rdp);
-            panel1.Location = new System.Drawing.Point(0, 46);
-            panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            panel1.Location = new System.Drawing.Point(0, 57);
+            panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(945, 722);
+            panel1.Size = new System.Drawing.Size(1260, 889);
             panel1.TabIndex = 3;
             // 
             // rdp
             // 
             this.rdp.Enabled = true;
             this.rdp.Location = new System.Drawing.Point(9, 4);
+            this.rdp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdp.Name = "rdp";
             this.rdp.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("rdp.OcxState")));
             this.rdp.Size = new System.Drawing.Size(910, 882);
@@ -71,13 +72,15 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lokiToolStripMenuItem,
             this.sleipnirToolStripMenuItem,
             this.disconnectToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(946, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1261, 26);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,13 +89,13 @@
             this.lokiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendFileSendKeysToolStripMenuItem});
             this.lokiToolStripMenuItem.Name = "lokiToolStripMenuItem";
-            this.lokiToolStripMenuItem.Size = new System.Drawing.Size(48, 24);
+            this.lokiToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.lokiToolStripMenuItem.Text = "Loki";
             // 
             // sendFileSendKeysToolStripMenuItem
             // 
             this.sendFileSendKeysToolStripMenuItem.Name = "sendFileSendKeysToolStripMenuItem";
-            this.sendFileSendKeysToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
+            this.sendFileSendKeysToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
             this.sendFileSendKeysToolStripMenuItem.Text = "Send File (SendKeys)";
             this.sendFileSendKeysToolStripMenuItem.Click += new System.EventHandler(this.sendFileSendKeysToolStripMenuItem_Click);
             // 
@@ -101,20 +104,20 @@
             this.sleipnirToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendFileOnVirtualChannelToolStripMenuItem});
             this.sleipnirToolStripMenuItem.Name = "sleipnirToolStripMenuItem";
-            this.sleipnirToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.sleipnirToolStripMenuItem.Size = new System.Drawing.Size(63, 22);
             this.sleipnirToolStripMenuItem.Text = "Sleipnir";
             // 
             // sendFileOnVirtualChannelToolStripMenuItem
             // 
             this.sendFileOnVirtualChannelToolStripMenuItem.Name = "sendFileOnVirtualChannelToolStripMenuItem";
-            this.sendFileOnVirtualChannelToolStripMenuItem.Size = new System.Drawing.Size(265, 24);
+            this.sendFileOnVirtualChannelToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
             this.sendFileOnVirtualChannelToolStripMenuItem.Text = "Send File On Virtual Channel";
             this.sendFileOnVirtualChannelToolStripMenuItem.Click += new System.EventHandler(this.sendFileOnVirtualChannelToolStripMenuItem_Click);
             // 
             // disconnectToolStripMenuItem
             // 
             this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(90, 22);
             this.disconnectToolStripMenuItem.Text = "Disconnect";
             this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem_Click);
             // 
@@ -128,9 +131,10 @@
             // 
             // progressBarLoki
             // 
-            this.progressBarLoki.Location = new System.Drawing.Point(10, 26);
+            this.progressBarLoki.Location = new System.Drawing.Point(13, 32);
+            this.progressBarLoki.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBarLoki.Name = "progressBarLoki";
-            this.progressBarLoki.Size = new System.Drawing.Size(933, 15);
+            this.progressBarLoki.Size = new System.Drawing.Size(1244, 18);
             this.progressBarLoki.TabIndex = 2;
             // 
             // openFileDialog1
@@ -139,16 +143,17 @@
             // 
             // Loki
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(946, 774);
+            this.ClientSize = new System.Drawing.Size(1261, 880);
             this.Controls.Add(this.progressBarLoki);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Loki";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Loki - RDP Connection";
